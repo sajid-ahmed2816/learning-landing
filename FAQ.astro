@@ -1,0 +1,102 @@
+---
+// FAQ.astro
+const faqs = [
+  {
+    question: "How can I create an account for my child?",
+    answer: "To create an account, click on the 'Sign Up' button on our homepage. Fill in your child's details, choose a username and password, and verify your email address. Once done, your child can start learning right away!"
+  },
+  {
+    question: "What age group is your platform suitable for?",
+    answer: "Our platform is designed for children aged 5-12. We offer a variety of courses and activities tailored to different age groups within this range."
+  },
+  {
+    question: "How much does a subscription cost?",
+    answer: "We offer various subscription plans starting from $9.99 per month. You can also opt for our annual plan which offers better value. Check our pricing page for current offers and discounts."
+  },
+  {
+    question: "Can multiple children use the same account?",
+    answer: "Yes! Our family plan allows up to 4 children to use the platform under one subscription. Each child gets their own personalized learning experience."
+  },
+  {
+    question: "Is there a free trial available?",
+    answer: "Absolutely! We offer a 7-day free trial for all new users. This gives you full access to our platform so you can see if it's the right fit for your child before committing to a subscription."
+  }
+];
+---
+
+<div class="bg-white">
+  <div class="mx-auto max-w-7xl px-6 py-24 sm:pt-32 lg:px-8 lg:py-40">
+    <div class="lg:grid lg:grid-cols-12 lg:gap-8">
+      <div class="lg:col-span-5">
+        <h2 >
+          Frequently asked questions
+        </h2>
+        <p >
+          Can't find the answer you're looking for? Reach out to our <a
+            href="#"
+            class="font-semibold text-indigo-600 hover:text-indigo-500">customer support</a
+          > team.
+        </p>
+      </div>
+      <div class="mt-10 lg:col-span-7 lg:mt-0">
+        <dl x-data="faqHandler()">
+          {faqs.map((faq, index) => (
+            <div class="pt-6">
+              <dt class="text-lg">
+                <button
+                  type="button"
+                  class="flex w-full items-start justify-between text-left text-gray-400"
+                  @click={`toggle(${index})`}
+                  aria-controls={`faq-${index}`}
+                  :aria-expanded={`isOpen(${index})`}
+                >
+                  <span class="font-medium text-gray-900">{faq.question}</span>
+                  <span class="ml-6 flex h-7 items-center">
+                    <svg 
+                      class="h-6 w-6 transform transition-transform duration-300" 
+                      :class={`isOpen(${index}) ? 'rotate-180' : ''`}
+                      fill="none" 
+                      viewBox="0 0 24 24" 
+                      stroke-width="1.5" 
+                      stroke="currentColor" 
+                      aria-hidden="true"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </span>
+                </button>
+              </dt>
+              <dd 
+                class="mt-2 pr-12 overflow-hidden transition-all duration-300 max-h-0" 
+                :class={`isOpen(${index}) ? 'max-h-96' : ''`}
+                id={`faq-${index}`}
+              >
+                <p>{faq.answer}</p>
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import Alpine from 'alpinejs';
+ function faqHanlder() {
+    return {
+      activeIndex: null,
+      toggle(index: any) {
+        this.activeIndex = this.activeIndex === index ? null : index;
+      },
+      isOpen(index: any) {
+        return this.activeIndex === index;
+      }
+    }
+ }
+ 
+    Alpine.data('faqHandler', () => faqHanlder);
+  
+
+  
+</script>

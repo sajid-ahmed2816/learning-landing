@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kids Learning</title>
+  <!-- TailwindCSS -->
+  <link rel="stylesheet" href="output.css">
+
+  <!-- Google Poppins Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+
+  <!-- Swiper Styles -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+  <!-- Custom Style -->
+  <style>
+    /* Swiper Styles */
+    .swiper {
+      width: 100%;
+    }
+
+    .swiper .swiper-slide {
+      border-radius: 24px !important;
+    }
+
+    .carousel-container {
+      margin-right: -10%;
+      margin-left: -10%;
+    }
+
+    @media screen and (max-width: 767px) {
+      .carousel-container {
+        margin-right: 6%;
+        margin-left: 6%;
+      }
+
+      .mySwiper .swiper-slide {
+        padding-inline: 10px;
+      }
+    }
+
+    .bento__swiper .swiper-slide-active {
+      box-shadow: 25px 15px 20px -15px #e2e2e2;
+    }
+
+    .cat__swiper .swiper-slide-active {
+      height: 120px;
+    }
+
+    .cat__swiper .swiper-slide-active div {
+      height: 100%;
+      justify-content: space-between;
+      gap: 0
+    }
+
+    /* Swiper Styles */
+
+    .progress-circle {
+      position: relative;
+      width: 70px;
+      height: 70px;
+    }
+
+    .progress-circle svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .progress-circle circle {
+      fill: none;
+      stroke-width: 5;
+    }
+
+    .progress-circle circle:first-of-type {
+      stroke: #e6e6e6;
+    }
+
+    .progress-circle .progress {
+      stroke: orange;
+      stroke-dasharray: 245;
+      /* 2 * π * 45 */
+      stroke-dashoffset: 245;
+      /* Start from zero progress */
+      transition: stroke-dashoffset 0.5s ease;
+    }
+
+    .progress-circle .progress-number {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 24px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header Section -->
+  <header x-data="navigation()" class="bg-white">
+    <nav class="mx-auto max-w-7xl p-6 flex items-center justify-between lg:px-8" aria-label="Global">
+      <div class="flex items-center gap-6">
+        <div class="flex lg:flex-1">
+          <a href="#" class="-m-1.5 p-1.5">
+            <span class="sr-only">Your Company</span>
+            <img loading="lazy" class="h-8 w-auto"
+              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Company Logo" />
+          </a>
+        </div>
+        <div class="hidden lg:flex lg:gap-x-5">
+          <a href="#"
+            class="text-sm font-semibold leading-6 text-black hover:text-accent focus-within:text-accent">Home</a>
+          <a href="#"
+            class="text-sm font-semibold leading-6 text-black hover:text-accent focus-within:text-accent">Student
+            Testimonial</a>
+          <div class="relative">
+            <button @click="toggleCompanyMenu" type="button"
+              class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-black hover:text-accent focus-within:text-accent"
+              :aria-expanded="companyMenuOpen">
+              Courses
+              <svg class="h-5 w-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd"
+                  d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </button>
+            <div x-show="companyMenuOpen" x-transition:enter="transition ease-out duration-200"
+              x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
+              x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
+              x-transition:leave-end="opacity-0 translate-y-1" @click.away="companyMenuOpen = false"
+              class="absolute -left-8 top-full z-10 mt-3 w-56 rounded-xl bg-white p-2 shadow-lg ring-1 ring-black">
+              <a href="#"
+                class="block rounded-lg px-3 py-2 text-sm font-semibold leading-6 text-gray-900 hover:text-accent focus-within:text-accent">About
+                us</a>
+              <a href="#"
+                class="block rounded-lg px-3 py-2 text-sm font-semibold leading-6 text-gray-900 hover:text-accent focus-within:text-accent">Careers</a>
+              <a href="#"
+                class="block rounded-lg px-3 py-2 text-sm font-semibold leading-6 text-gray-900 hover:text-accent focus-within:text-accent">Support</a>
+              <a href="#"
+                class="block rounded-lg px-3 py-2 text-sm font-semibold leading-6 text-gray-900 hover:text-accent focus-within:text-accent">Press</a>
+              <a href="#"
+                class="block rounded-lg px-3 py-2 text-sm font-semibold leading-6 text-gray-900 hover:text-accent focus-within:text-accent">Blog</a>
+            </div>
+          </div>
+          <a href="#"
+            class="text-sm font-semibold leading-6 text-black hover:text-accent focus-within:text-accent">Career
+            Path</a>
+          <a href="#" class="text-sm font-semibold leading-6 text-black hover:text-accent focus-within:text-accent">Help
+            Center</a>
+        </div>
+      </div>
+      <div class="flex lg:hidden">
+        <button @click="toggleMobileMenu" type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
+          <span class="sr-only">Open main menu</span>
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+            aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5">
+            </path>
+          </svg>
+        </button>
+      </div>
+      <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+        <div>
+          <button class="border rounded-lg py-2 px-4 outline-none hover:border-accent hover:text-accent">Be A
+            Mentor</button>
+          <button
+            class="border rounded-lg bg-black text-white py-2 px-4 outline-none hover:bg-accent hover:text-white">Be A
+            Student</button>
+        </div>
+      </div>
+    </nav>
+    <!-- Mobile menu, show/hide based on menu open state. -->
+    <div x-show="mobileMenuOpen" class="lg:hidden" role="dialog" aria-modal="true">
+      <!-- Background backdrop, show/hide based on slide-over state. -->
+      <div class="fixed inset-0 z-10"></div>
+      <div
+        class="fixed inset-y-0 right-0 z-[9999] w-full bg-white px-6 py-6 overflow-y-auto sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+        <div class="flex items-center justify-between">
+          <a href="#" class="-m-1.5 p-1.5">
+            <span class="sr-only">Your Company</span>
+            <img loading="lazy" class="h-8 w-auto"
+              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Company Logo" />
+          </a>
+          <button @click="closeMobileMenu" type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
+            <span class="sr-only">Close menu</span>
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+              aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+        <div class="mt-6 flow-root">
+          <div class="-my-6 divide-y divide-gray-500/10">
+            <div class="space-y-2 py-6">
+              <a href="#"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Product</a>
+              <a href="#"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Features</a>
+              <a href="#"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Marketplace</a>
+              <div class="-mx-3">
+                <button @click="toggleMobileCompanyMenu" type="button"
+                  class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  :aria-expanded="mobileCompanyMenuOpen">
+                  Company
+                  <svg class="h-5 w-5 flex-none" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd"
+                      d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                      clip-rule="evenodd"></path>
+                  </svg>
+                </button>
+                <!-- 'Company' sub-menu, show/hide based on menu state. -->
+                <div x-show="mobileCompanyMenuOpen" x-transition:enter="transition ease-out duration-200"
+                  x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
+                  x-transition:leave="transition ease-in duration-150"
+                  x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-1"
+                  class="mt-2 space-y-2">
+                  <a href="#"
+                    class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50">About
+                    us</a>
+                  <a href="#"
+                    class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50">Careers</a>
+                  <a href="#"
+                    class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50">Support</a>
+                  <a href="#"
+                    class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50">Press</a>
+                  <a href="#"
+                    class="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50">Blog</a>
+                </div>
+              </div>
+            </div>
+            <div class="py-6">
+              <a href="#"
+                class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Log
+                in</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <div class="relative isolate overflow-hidden bg-white">
+    <svg
+      class="absolute inset-0 -z-10 h-full w-full stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
+      aria-hidden="true">
+      <defs>
+        <pattern id="0787a7c5-978c-4f66-83c7-11c213f99cb7" width="200" height="200" x="50%" y="-1"
+          patternUnits="userSpaceOnUse">
+          <path d="M.5 200V.5H200" fill="none" />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" stroke-width="0" fill="url(#0787a7c5-978c-4f66-83c7-11c213f99cb7)" />
+    </svg>
+    <div class="mx-auto max-w-7xl px-8 py-10 lg:py-16">
+      <div class="grid grid-cols-12 gap-0 md:gap-16">
+        <div class="col-span-12 lg:col-span-6 flex flex-col items-start gap-6">
+          <div>
+            <a href="#" class="inline-flex space-x-6">
+              <span class="rounded-full px-3 py-1 text-sm font-semibold leading-6 text-accent ring-1 ring-accent">
+                What's new
+              </span>
+            </a>
+          </div>
+          <h1 class="text-5xl md:text-6xl">
+            Transform Your Learnig Experience with Our Expert Mentor
+          </h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae nulla laudantium dolores quisquam voluptas?
+            Illo alias aut nostrum rem architecto perferendis veniam recusandae itaque?
+          </p>
+          <div class="flex items-center gap-6">
+            <button class="bg-black text-white py-2 px-4 rounded-md hover:bg-accent hover:text-white">
+              Get Started
+            </button>
+            <a href="#" class="text-lg font-semibold leading-6 text-black hover:text-accent">Learn more <span
+                aria-hidden="true">→</span></a>
+          </div>
+        </div>
+        <div class="col-span-12 lg:col-span-6 flex flex-col justify-start gap-4">
+          <div
+            class="mx-auto mt-16 flex max-w-2xl sm:mt-24 md:mt-0 lg:ml-10 lg:mr-0 lg:mt-0 lg:max-w-none lg:flex-none xl:ml-10">
+            <div class="max-w-3xl flex-none sm:max-w-5xl lg:max-w-none">
+              <div
+                class="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-accent ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4">
+                <img loading="lazy" src="../src/assets/medium-shot-little-kids-studying-bible_23-2149613739.avif"
+                  alt="hero-image" width="2432" height="1442"
+                  class="w-[50rem] rounded-md shadow-2xl ring-1 ring-accent ring-gray-900/10" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Carousel Section -->
+  <div class="overflow-hidden py-20">
+    <div class="carousel-container">
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="flex flex-col gap-4">
+              <img loading="lazy" src="../src/assets/testimonial_6.jpg" alt="slider-image" class="rounded-3xl">
+              <div class="flex justify-between items-center px-4 pb-4">
+                <span class="w-[65%] font-semibold">Memorable UI Design For Interactive Experiences</span>
+                <span class="flex gap-2 text-sm"><span>By</span><span class="font-semibold">Luis Mark</span></span>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="flex flex-col p-4 gap-4 shadow-lg bg-white rounded-3xl">
+              <div class="flex items-center gap-4">
+                <img loading="lazy" src="https://placehold.co/400x400" alt="profile-image"
+                  class="w-12 h-12 rounded-2xl">
+                <div class="flex flex-col">
+                  <p class="font-semibold">Michael Saputra</p>
+                  <p class="text-xs text-stone-500">Course On <u>How To Be A Good Product Manager</u></p>
+                </div>
+              </div>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, id iure nostrum cupiditate
+                exercitationem eveniet ipsa itaque, reprehenderit blanditiis quisquam, ipsum laudantium soluta dolore
+                repudiandae earum voluptas voluptate quos possimus assumenda eos.
+              </p>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="flex flex-col gap-4">
+              <img loading="lazy" src="../src/assets/testimonial_1.jpg" alt="slider-image" class="rounded-3xl">
+              <div class="flex justify-between items-center px-4 pb-4">
+                <span class="w-[65%] font-semibold">Memorable UI Design For Interactive Experiences</span>
+                <span class="flex gap-2 text-sm"><span>By</span><span class="font-semibold">Luis Mark</span></span>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="flex flex-col p-4 gap-4 shadow-lg bg-white rounded-3xl">
+              <div class="flex items-center gap-4">
+                <img loading="lazy" src="https://placehold.co/400x400" alt="profile-image"
+                  class="w-12 h-12 rounded-2xl">
+                <div class="flex flex-col">
+                  <p class="font-semibold">Michael Saputra</p>
+                  <p class="text-xs text-stone-500">Course On <u>How To Be A Good Product Manager</u></p>
+                </div>
+              </div>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, id iure nostrum cupiditate
+                exercitationem eveniet ipsa itaque, reprehenderit blanditiis quisquam, ipsum laudantium soluta dolore
+                repudiandae earum voluptas voluptate quos possimus assumenda eos.
+              </p>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="flex flex-col gap-4">
+              <img loading="lazy" src="../src/assets/testimonial_2.jpg" alt="slider-image" class="rounded-3xl">
+              <div class="flex justify-between items-center px-4 pb-4">
+                <span class="w-[65%] font-semibold">Memorable UI Design For Interactive Experiences</span>
+                <span class="flex gap-2 text-sm"><span>By</span><span class="font-semibold">Luis Mark</span></span>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="flex flex-col p-4 gap-4 shadow-lg bg-white rounded-3xl">
+              <div class="flex items-center gap-4">
+                <img loading="lazy" src="https://placehold.co/400x400" alt="profile-image"
+                  class="w-12 h-12 rounded-2xl">
+                <div class="flex flex-col">
+                  <p class="font-semibold">Michael Saputra</p>
+                  <p class="text-xs text-stone-500">Course On <u>How To Be A Good Product Manager</u></p>
+                </div>
+              </div>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, id iure nostrum cupiditate
+                exercitationem eveniet ipsa itaque, reprehenderit blanditiis quisquam, ipsum laudantium soluta dolore
+                repudiandae earum voluptas voluptate quos possimus assumenda eos.
+              </p>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="flex flex-col gap-4">
+              <img loading="lazy" src="../src/assets/testimonial_3.jpg" alt="slider-image" class="rounded-3xl">
+              <div class="flex justify-between items-center px-4 pb-4">
+                <span class="w-[65%] font-semibold">Memorable UI Design For Interactive Experiences</span>
+                <span class="flex gap-2 text-sm"><span>By</span><span class="font-semibold">Luis Mark</span></span>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="flex flex-col p-4 gap-4 shadow-lg bg-white rounded-3xl">
+              <div class="flex items-center gap-4">
+                <img loading="lazy" src="https://placehold.co/400x400" alt="profile-image"
+                  class="w-12 h-12 rounded-2xl">
+                <div class="flex flex-col">
+                  <p class="font-semibold">Michael Saputra</p>
+                  <p class="text-xs text-stone-500">Course On <u>How To Be A Good Product Manager</u></p>
+                </div>
+              </div>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, id iure nostrum cupiditate
+                exercitationem eveniet ipsa itaque, reprehenderit blanditiis quisquam, ipsum laudantium soluta dolore
+                repudiandae earum voluptas voluptate quos possimus assumenda eos.
+              </p>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="flex flex-col gap-4">
+              <img loading="lazy" src="../src/assets/testimonial_4.jpg" alt="slider-image" class="rounded-3xl">
+              <div class="flex justify-between items-center px-4 pb-4">
+                <span class="w-[65%] font-semibold">Memorable UI Design For Interactive Experiences</span>
+                <span class="flex gap-2 text-sm"><span>By</span><span class="font-semibold">Luis Mark</span></span>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="flex flex-col p-4 gap-4 shadow-lg bg-white rounded-3xl">
+              <div class="flex items-center gap-4">
+                <img loading="lazy" src="https://placehold.co/400x400" alt="profile-image"
+                  class="w-12 h-12 rounded-2xl">
+                <div class="flex flex-col">
+                  <p class="font-semibold">Michael Saputra</p>
+                  <p class="text-xs text-stone-500">Course On <u>How To Be A Good Product Manager</u></p>
+                </div>
+              </div>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, id iure nostrum cupiditate
+                exercitationem eveniet ipsa itaque, reprehenderit blanditiis quisquam, ipsum laudantium soluta dolore
+                repudiandae earum voluptas voluptate quos possimus assumenda eos.
+              </p>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="flex flex-col gap-4">
+              <img loading="lazy" src="../src/assets/testimonial_5.jpg" alt="slider-image" class="rounded-3xl">
+              <div class="flex justify-between items-center px-4 pb-4">
+                <span class="w-[65%] font-semibold">Memorable UI Design For Interactive Experiences</span>
+                <span class="flex gap-2 text-sm"><span>By</span><span class="font-semibold">Luis Mark</span></span>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="flex flex-col p-4 gap-4 shadow-lg bg-white rounded-3xl">
+              <div class="flex items-center gap-4">
+                <img loading="lazy" src="https://placehold.co/400x400" alt="profile-image"
+                  class="w-12 h-12 rounded-2xl">
+                <div class="flex flex-col">
+                  <p class="font-semibold">Michael Saputra</p>
+                  <p class="text-xs text-stone-500">Course On <u>How To Be A Good Product Manager</u></p>
+                </div>
+              </div>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, id iure nostrum cupiditate
+                exercitationem eveniet ipsa itaque, reprehenderit blanditiis quisquam, ipsum laudantium soluta dolore
+                repudiandae earum voluptas voluptate quos possimus assumenda eos.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Why you need section -->
+  <div class="mx-auto max-w-7xl px-6 py-10 lg:px-8 lg:py-16">
+    <div class="grid grid-cols-12 gap-x-0 md:gap-x-12">
+      <div class="col-span-12 md:col-span-6 flex flex-col gap-4 order-2 md:order-1">
+        <div
+          class="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-accent ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4 mt-10 md:mt-0">
+          <img loading="lazy" src="../src/assets/Section.jpg" alt="hero-image" width="2432" height="1442"
+            class="w-[50rem] rounded-md shadow-2xl ring-1 ring-accent ring-gray-900/10" />
+        </div>
+      </div>
+      <div class="col-span-12 md:col-span-6 flex flex-col gap-4 order-1 md:order-2">
+        <div class="flex flex-col items-start gap-7">
+          <div>
+            <a href="#" class="inline-flex space-x-6">
+              <span class="rounded-full px-3 py-1 text-sm font-semibold leading-6 text-accent ring-1 ring-accent">
+                Why you need to lorem ipsum
+              </span>
+            </a>
+          </div>
+          <h3 class="text-2xl md:text-4xl ">
+            Courses or bootcamps are available, choose what you like
+          </h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis eius odit recusandae eveniet
+            exercitationem corrupti, laudantium a voluptate culpa dicta consequatur id excepturi pariatur facere
+            corporis ea porro ducimus minus maiores consequuntur dolorem provident impedit repudiandae voluptatem?
+            Officia asperiores fuga quae enim.
+          </p>
+          <button class="py-2 px-4 bg-black text-white rounded-full hover:bg-accent">Explore</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Featured Section -->
+  <div class="cta-section">
+    <div class="cta-container">
+      <h2 class="text-3xl md:text-4xl font-semibold">
+        There is nothing stopping you <span class="md:block"></span>from becoming a master
+      </h2>
+      <div class="cta-button-container">
+        <a href="#" class="py-2 px-4 border rounded-lg hover:border-accent hover:text-accent font-semibold"> Explore our
+          courses </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="bento">
+    <div class="bento__container">
+      <div class="bento__grid">
+        <div class="bento__item bento__item--large">
+          <div class="bento__item-content bento__item-content--with-carousel">
+            <div class="bento__item-text bento__item-text--with-carousel">
+              <div class="flex flex-col justify-between">
+                <h5 class="text-accent">Categories</h5>
+                <p class="text-2xl">
+                  Find the courses
+                  <span class="text-2xl lg:block"></span>
+                  you are most
+                  <span class="lg:block"></span>
+                  interested in,
+                  <span class="lg:block"></span>
+                  Just today
+                </p>
+              </div>
+              <a href="#" class="py-2 px-4 rounded-full bg-black hover:bg-accent text-white text-center"> Find your
+                course</a>
+            </div>
+            <div class="bento__carousel-container">
+              <!-- Carousel Here: Use Lightwiegh Vanilla Js plugin please no Jquery -->
+              <div class="bento__swiper">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <div class="p-4 bg-[#ffffff] flex flex-col gap-4 rounded-3xl">
+                      <div class="flex items-center gap-2">
+                        <p class="text-xs text-black">Learnig Path /</p>
+                        <p class="py-1 px-2 bg-accent text-xs text-white font-semibold rounded-full">Product Manager
+                        </p>
+                      </div>
+                      <div class="flex flex-col gap-2">
+                        <h5 class="font-semibold text-black">Be a good Product Manager</h5>
+                        <p class="text-stone-500 text-xs">
+                          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore odio harum ut. Id,
+                          architecto repudiandae rem sit aliquam explicabo iure earum fuga! Cupiditate, esse.
+                        </p>
+                        <img loading="lazy" src="../src/assets/courses_1.jpg" alt="course-cat-img" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="p-4 bg-[#ffffff] flex flex-col gap-4 rounded-3xl">
+                      <div class="flex items-center gap-2">
+                        <p class="text-xs text-black">Learnig Path /</p>
+                        <p class="py-1 px-2 bg-accent text-xs text-white font-semibold rounded-full">Product Manager
+                        </p>
+                      </div>
+                      <div class="flex flex-col gap-2">
+                        <h5 class="font-semibold text-black">Be a good Product Manager</h5>
+                        <p class="text-stone-500 text-xs">
+                          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore odio harum ut. Id,
+                          architecto repudiandae rem sit aliquam explicabo iure earum fuga! Cupiditate, esse.
+                        </p>
+                        <img loading="lazy" src="../src/assets/courses_2.jpg" alt="course-cat-img" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="p-4 bg-[#ffffff] flex flex-col gap-4 rounded-3xl">
+                      <div class="flex items-center gap-2">
+                        <p class="text-xs text-black">Learnig Path /</p>
+                        <p class="py-1 px-2 bg-accent text-xs text-white font-semibold rounded-full">Product Manager
+                        </p>
+                      </div>
+                      <div class="flex flex-col gap-2">
+                        <h5 class="font-semibold text-black">Be a good Product Manager</h5>
+                        <p class="text-stone-500 text-xs">
+                          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore odio harum ut. Id,
+                          architecto repudiandae rem sit aliquam explicabo iure earum fuga! Cupiditate, esse.
+                        </p>
+                        <img loading="lazy" src="../src/assets/courses_1.jpg" alt="course-cat-img" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="p-4 bg-[#ffffff] flex flex-col gap-4 rounded-3xl">
+                      <div class="flex items-center gap-2">
+                        <p class="text-xs text-black">Learnig Path /</p>
+                        <p class="py-1 px-2 bg-accent text-xs text-white font-semibold rounded-full">Product Manager
+                        </p>
+                      </div>
+                      <div class="flex flex-col gap-2">
+                        <h5 class="font-semibold text-black">Be a good Product Manager</h5>
+                        <p class="text-stone-500 text-xs">
+                          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore odio harum ut. Id,
+                          architecto repudiandae rem sit aliquam explicabo iure earum fuga! Cupiditate, esse.
+                        </p>
+                        <img loading="lazy" src="../src/assets/courses_2.jpg" alt="course-cat-img" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Carousel Here: Use Lightwiegh Vanilla Js plugin please no Jquery -->
+            </div>
+          </div>
+        </div>
+
+        <div class="bento__item bento__item--medium">
+          <div class="bento__item-content">
+            <div class="bento__item-image">
+              <img loading="lazy" src="../src/assets/community.jpg" alt="Keep your loved ones safe" />
+            </div>
+            <div class="bento__item-text">
+              <h5 class="font-semibold text-accent">Communities</h5>
+              <p class="bento__item-text-description">
+                Meet And Connect With Our Active Communities
+              </p>
+              <div class="pb-4 md:pb-0">
+                <button class="py-2 px-4 bg-black hover:bg-accent rounded-full text-white">Connect With Member</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bento__item bento__item--small">
+          <div class="bento__item-content">
+            <div class="pt-9 pb-4 px-4">
+              <div class="bg-[#ffffff] p-3 rounded-xl flex items-center gap-4 shadow-2xl">
+                <div class="progress-circle ">
+                  <span class="progress-number">54</span>
+                  <svg>
+                    <circle cx="35" cy="35" r="32"></circle>
+                    <circle cx="35" cy="35" r="32" class="progress"></circle>
+                  </svg>
+                </div>
+                <div class="w-9/12 text-left text-black text-lg">
+                  <p>Keep your good learning progress, Let's rock!</p>
+                </div>
+              </div>
+            </div>
+            <div class="cat__swiper">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <div class="p-2 bg-[#ffffff] flex flex-col gap-2 rounded-xl items-center">
+                    <p class="text-xs text-stone-400">Day 1</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32px"
+                      height="32px" viewBox="-33 0 255 255" preserveAspectRatio="xMidYMid">
+                      <defs>
+                        <style>
+                          .cls-3 {
+                            fill: url(#linear-gradient-1);
+                          }
+
+                          .cls-4 {
+                            fill: #fc9502;
+                          }
+
+                          .cls-5 {
+                            fill: #fce202;
+                          }
+                        </style>
+
+                        <linearGradient id="linear-gradient-1" gradientUnits="userSpaceOnUse" x1="94.141" y1="255"
+                          x2="94.141" y2="0.188">
+                          <stop offset="0" stop-color="#ff4c0d" />
+                          <stop offset="1" stop-color="#fc9502" />
+                        </linearGradient>
+                      </defs>
+                      <g id="fire">
+                        <path
+                          d="M187.899,164.809 C185.803,214.868 144.574,254.812 94.000,254.812 C42.085,254.812 -0.000,211.312 -0.000,160.812 C-0.000,154.062 -0.121,140.572 10.000,117.812 C16.057,104.191 19.856,95.634 22.000,87.812 C23.178,83.513 25.469,76.683 32.000,87.812 C35.851,94.374 36.000,103.812 36.000,103.812 C36.000,103.812 50.328,92.817 60.000,71.812 C74.179,41.019 62.866,22.612 59.000,9.812 C57.662,5.384 56.822,-2.574 66.000,0.812 C75.352,4.263 100.076,21.570 113.000,39.812 C131.445,65.847 138.000,90.812 138.000,90.812 C138.000,90.812 143.906,83.482 146.000,75.812 C148.365,67.151 148.400,58.573 155.999,67.813 C163.226,76.600 173.959,93.113 180.000,108.812 C190.969,137.321 187.899,164.809 187.899,164.809 Z"
+                          id="path-1" class="cls-3" fill-rule="evenodd" />
+                        <path
+                          d="M94.000,254.812 C58.101,254.812 29.000,225.711 29.000,189.812 C29.000,168.151 37.729,155.000 55.896,137.166 C67.528,125.747 78.415,111.722 83.042,102.172 C83.953,100.292 86.026,90.495 94.019,101.966 C98.212,107.982 104.785,118.681 109.000,127.812 C116.266,143.555 118.000,158.812 118.000,158.812 C118.000,158.812 125.121,154.616 130.000,143.812 C131.573,140.330 134.753,127.148 143.643,140.328 C150.166,150.000 159.127,167.390 159.000,189.812 C159.000,225.711 129.898,254.812 94.000,254.812 Z"
+                          id="path-2" class="cls-4" fill-rule="evenodd" />
+                        <path
+                          d="M95.000,183.812 C104.250,183.812 104.250,200.941 116.000,223.812 C123.824,239.041 112.121,254.812 95.000,254.812 C77.879,254.812 69.000,240.933 69.000,223.812 C69.000,206.692 85.750,183.812 95.000,183.812 Z"
+                          id="path-3" class="cls-5" fill-rule="evenodd" />
+                      </g>
+                    </svg>
+                    <p class="text-xs text-black">Sunday</p>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="p-2 bg-[#ffffff] flex flex-col gap-2 rounded-xl items-center">
+                    <p class="text-xs text-stone-400">Day 2</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32px"
+                      height="32px" viewBox="-33 0 255 255" preserveAspectRatio="xMidYMid">
+                      <defs>
+                        <style>
+                          .cls-3 {
+                            fill: url(#linear-gradient-1);
+                          }
+
+                          .cls-4 {
+                            fill: #fc9502;
+                          }
+
+                          .cls-5 {
+                            fill: #fce202;
+                          }
+                        </style>
+
+                        <linearGradient id="linear-gradient-1" gradientUnits="userSpaceOnUse" x1="94.141" y1="255"
+                          x2="94.141" y2="0.188">
+                          <stop offset="0" stop-color="#ff4c0d" />
+                          <stop offset="1" stop-color="#fc9502" />
+                        </linearGradient>
+                      </defs>
+                      <g id="fire">
+                        <path
+                          d="M187.899,164.809 C185.803,214.868 144.574,254.812 94.000,254.812 C42.085,254.812 -0.000,211.312 -0.000,160.812 C-0.000,154.062 -0.121,140.572 10.000,117.812 C16.057,104.191 19.856,95.634 22.000,87.812 C23.178,83.513 25.469,76.683 32.000,87.812 C35.851,94.374 36.000,103.812 36.000,103.812 C36.000,103.812 50.328,92.817 60.000,71.812 C74.179,41.019 62.866,22.612 59.000,9.812 C57.662,5.384 56.822,-2.574 66.000,0.812 C75.352,4.263 100.076,21.570 113.000,39.812 C131.445,65.847 138.000,90.812 138.000,90.812 C138.000,90.812 143.906,83.482 146.000,75.812 C148.365,67.151 148.400,58.573 155.999,67.813 C163.226,76.600 173.959,93.113 180.000,108.812 C190.969,137.321 187.899,164.809 187.899,164.809 Z"
+                          id="path-1" class="cls-3" fill-rule="evenodd" />
+                        <path
+                          d="M94.000,254.812 C58.101,254.812 29.000,225.711 29.000,189.812 C29.000,168.151 37.729,155.000 55.896,137.166 C67.528,125.747 78.415,111.722 83.042,102.172 C83.953,100.292 86.026,90.495 94.019,101.966 C98.212,107.982 104.785,118.681 109.000,127.812 C116.266,143.555 118.000,158.812 118.000,158.812 C118.000,158.812 125.121,154.616 130.000,143.812 C131.573,140.330 134.753,127.148 143.643,140.328 C150.166,150.000 159.127,167.390 159.000,189.812 C159.000,225.711 129.898,254.812 94.000,254.812 Z"
+                          id="path-2" class="cls-4" fill-rule="evenodd" />
+                        <path
+                          d="M95.000,183.812 C104.250,183.812 104.250,200.941 116.000,223.812 C123.824,239.041 112.121,254.812 95.000,254.812 C77.879,254.812 69.000,240.933 69.000,223.812 C69.000,206.692 85.750,183.812 95.000,183.812 Z"
+                          id="path-3" class="cls-5" fill-rule="evenodd" />
+                      </g>
+                    </svg>
+                    <p class="text-xs text-black">Monday</p>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="p-2 bg-[#ffffff] flex flex-col gap-2 rounded-xl items-center">
+                    <p class="text-xs text-stone-400">Day 3</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32px"
+                      height="32px" viewBox="-33 0 255 255" preserveAspectRatio="xMidYMid">
+                      <defs>
+                        <style>
+                          .cls-3 {
+                            fill: url(#linear-gradient-1);
+                          }
+
+                          .cls-4 {
+                            fill: #fc9502;
+                          }
+
+                          .cls-5 {
+                            fill: #fce202;
+                          }
+                        </style>
+
+                        <linearGradient id="linear-gradient-1" gradientUnits="userSpaceOnUse" x1="94.141" y1="255"
+                          x2="94.141" y2="0.188">
+                          <stop offset="0" stop-color="#ff4c0d" />
+                          <stop offset="1" stop-color="#fc9502" />
+                        </linearGradient>
+                      </defs>
+                      <g id="fire">
+                        <path
+                          d="M187.899,164.809 C185.803,214.868 144.574,254.812 94.000,254.812 C42.085,254.812 -0.000,211.312 -0.000,160.812 C-0.000,154.062 -0.121,140.572 10.000,117.812 C16.057,104.191 19.856,95.634 22.000,87.812 C23.178,83.513 25.469,76.683 32.000,87.812 C35.851,94.374 36.000,103.812 36.000,103.812 C36.000,103.812 50.328,92.817 60.000,71.812 C74.179,41.019 62.866,22.612 59.000,9.812 C57.662,5.384 56.822,-2.574 66.000,0.812 C75.352,4.263 100.076,21.570 113.000,39.812 C131.445,65.847 138.000,90.812 138.000,90.812 C138.000,90.812 143.906,83.482 146.000,75.812 C148.365,67.151 148.400,58.573 155.999,67.813 C163.226,76.600 173.959,93.113 180.000,108.812 C190.969,137.321 187.899,164.809 187.899,164.809 Z"
+                          id="path-1" class="cls-3" fill-rule="evenodd" />
+                        <path
+                          d="M94.000,254.812 C58.101,254.812 29.000,225.711 29.000,189.812 C29.000,168.151 37.729,155.000 55.896,137.166 C67.528,125.747 78.415,111.722 83.042,102.172 C83.953,100.292 86.026,90.495 94.019,101.966 C98.212,107.982 104.785,118.681 109.000,127.812 C116.266,143.555 118.000,158.812 118.000,158.812 C118.000,158.812 125.121,154.616 130.000,143.812 C131.573,140.330 134.753,127.148 143.643,140.328 C150.166,150.000 159.127,167.390 159.000,189.812 C159.000,225.711 129.898,254.812 94.000,254.812 Z"
+                          id="path-2" class="cls-4" fill-rule="evenodd" />
+                        <path
+                          d="M95.000,183.812 C104.250,183.812 104.250,200.941 116.000,223.812 C123.824,239.041 112.121,254.812 95.000,254.812 C77.879,254.812 69.000,240.933 69.000,223.812 C69.000,206.692 85.750,183.812 95.000,183.812 Z"
+                          id="path-3" class="cls-5" fill-rule="evenodd" />
+                      </g>
+                    </svg>
+                    <p class="text-xs text-black">Tuesday</p>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="p-2 bg-[#ffffff] flex flex-col gap-2 rounded-xl items-center">
+                    <p class="text-xs text-stone-400">Day 4</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32px"
+                      height="32px" viewBox="-33 0 255 255" preserveAspectRatio="xMidYMid">
+                      <defs>
+                        <style>
+                          .cls-3 {
+                            fill: url(#linear-gradient-1);
+                          }
+
+                          .cls-4 {
+                            fill: #fc9502;
+                          }
+
+                          .cls-5 {
+                            fill: #fce202;
+                          }
+                        </style>
+
+                        <linearGradient id="linear-gradient-1" gradientUnits="userSpaceOnUse" x1="94.141" y1="255"
+                          x2="94.141" y2="0.188">
+                          <stop offset="0" stop-color="#ff4c0d" />
+                          <stop offset="1" stop-color="#fc9502" />
+                        </linearGradient>
+                      </defs>
+                      <g id="fire">
+                        <path
+                          d="M187.899,164.809 C185.803,214.868 144.574,254.812 94.000,254.812 C42.085,254.812 -0.000,211.312 -0.000,160.812 C-0.000,154.062 -0.121,140.572 10.000,117.812 C16.057,104.191 19.856,95.634 22.000,87.812 C23.178,83.513 25.469,76.683 32.000,87.812 C35.851,94.374 36.000,103.812 36.000,103.812 C36.000,103.812 50.328,92.817 60.000,71.812 C74.179,41.019 62.866,22.612 59.000,9.812 C57.662,5.384 56.822,-2.574 66.000,0.812 C75.352,4.263 100.076,21.570 113.000,39.812 C131.445,65.847 138.000,90.812 138.000,90.812 C138.000,90.812 143.906,83.482 146.000,75.812 C148.365,67.151 148.400,58.573 155.999,67.813 C163.226,76.600 173.959,93.113 180.000,108.812 C190.969,137.321 187.899,164.809 187.899,164.809 Z"
+                          id="path-1" class="cls-3" fill-rule="evenodd" />
+                        <path
+                          d="M94.000,254.812 C58.101,254.812 29.000,225.711 29.000,189.812 C29.000,168.151 37.729,155.000 55.896,137.166 C67.528,125.747 78.415,111.722 83.042,102.172 C83.953,100.292 86.026,90.495 94.019,101.966 C98.212,107.982 104.785,118.681 109.000,127.812 C116.266,143.555 118.000,158.812 118.000,158.812 C118.000,158.812 125.121,154.616 130.000,143.812 C131.573,140.330 134.753,127.148 143.643,140.328 C150.166,150.000 159.127,167.390 159.000,189.812 C159.000,225.711 129.898,254.812 94.000,254.812 Z"
+                          id="path-2" class="cls-4" fill-rule="evenodd" />
+                        <path
+                          d="M95.000,183.812 C104.250,183.812 104.250,200.941 116.000,223.812 C123.824,239.041 112.121,254.812 95.000,254.812 C77.879,254.812 69.000,240.933 69.000,223.812 C69.000,206.692 85.750,183.812 95.000,183.812 Z"
+                          id="path-3" class="cls-5" fill-rule="evenodd" />
+                      </g>
+                    </svg>
+                    <p class="text-xs text-black">Wednesday</p>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="p-2 bg-[#ffffff] flex flex-col gap-2 rounded-xl items-center">
+                    <p class="text-xs text-stone-400">Day 5</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32px"
+                      height="32px" viewBox="-33 0 255 255" preserveAspectRatio="xMidYMid">
+                      <defs>
+                        <style>
+                          .cls-3 {
+                            fill: url(#linear-gradient-1);
+                          }
+
+                          .cls-4 {
+                            fill: #fc9502;
+                          }
+
+                          .cls-5 {
+                            fill: #fce202;
+                          }
+                        </style>
+
+                        <linearGradient id="linear-gradient-1" gradientUnits="userSpaceOnUse" x1="94.141" y1="255"
+                          x2="94.141" y2="0.188">
+                          <stop offset="0" stop-color="#ff4c0d" />
+                          <stop offset="1" stop-color="#fc9502" />
+                        </linearGradient>
+                      </defs>
+                      <g id="fire">
+                        <path
+                          d="M187.899,164.809 C185.803,214.868 144.574,254.812 94.000,254.812 C42.085,254.812 -0.000,211.312 -0.000,160.812 C-0.000,154.062 -0.121,140.572 10.000,117.812 C16.057,104.191 19.856,95.634 22.000,87.812 C23.178,83.513 25.469,76.683 32.000,87.812 C35.851,94.374 36.000,103.812 36.000,103.812 C36.000,103.812 50.328,92.817 60.000,71.812 C74.179,41.019 62.866,22.612 59.000,9.812 C57.662,5.384 56.822,-2.574 66.000,0.812 C75.352,4.263 100.076,21.570 113.000,39.812 C131.445,65.847 138.000,90.812 138.000,90.812 C138.000,90.812 143.906,83.482 146.000,75.812 C148.365,67.151 148.400,58.573 155.999,67.813 C163.226,76.600 173.959,93.113 180.000,108.812 C190.969,137.321 187.899,164.809 187.899,164.809 Z"
+                          id="path-1" class="cls-3" fill-rule="evenodd" />
+                        <path
+                          d="M94.000,254.812 C58.101,254.812 29.000,225.711 29.000,189.812 C29.000,168.151 37.729,155.000 55.896,137.166 C67.528,125.747 78.415,111.722 83.042,102.172 C83.953,100.292 86.026,90.495 94.019,101.966 C98.212,107.982 104.785,118.681 109.000,127.812 C116.266,143.555 118.000,158.812 118.000,158.812 C118.000,158.812 125.121,154.616 130.000,143.812 C131.573,140.330 134.753,127.148 143.643,140.328 C150.166,150.000 159.127,167.390 159.000,189.812 C159.000,225.711 129.898,254.812 94.000,254.812 Z"
+                          id="path-2" class="cls-4" fill-rule="evenodd" />
+                        <path
+                          d="M95.000,183.812 C104.250,183.812 104.250,200.941 116.000,223.812 C123.824,239.041 112.121,254.812 95.000,254.812 C77.879,254.812 69.000,240.933 69.000,223.812 C69.000,206.692 85.750,183.812 95.000,183.812 Z"
+                          id="path-3" class="cls-5" fill-rule="evenodd" />
+                      </g>
+                    </svg>
+                    <p class="text-xs text-black">Thursday</p>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="p-2 bg-[#ffffff] flex flex-col gap-2 rounded-xl items-center">
+                    <p class="text-xs text-stone-400">Day 6</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32px"
+                      height="32px" viewBox="-33 0 255 255" preserveAspectRatio="xMidYMid">
+                      <defs>
+                        <style>
+                          .cls-3 {
+                            fill: url(#linear-gradient-1);
+                          }
+
+                          .cls-4 {
+                            fill: #fc9502;
+                          }
+
+                          .cls-5 {
+                            fill: #fce202;
+                          }
+                        </style>
+
+                        <linearGradient id="linear-gradient-1" gradientUnits="userSpaceOnUse" x1="94.141" y1="255"
+                          x2="94.141" y2="0.188">
+                          <stop offset="0" stop-color="#ff4c0d" />
+                          <stop offset="1" stop-color="#fc9502" />
+                        </linearGradient>
+                      </defs>
+                      <g id="fire">
+                        <path
+                          d="M187.899,164.809 C185.803,214.868 144.574,254.812 94.000,254.812 C42.085,254.812 -0.000,211.312 -0.000,160.812 C-0.000,154.062 -0.121,140.572 10.000,117.812 C16.057,104.191 19.856,95.634 22.000,87.812 C23.178,83.513 25.469,76.683 32.000,87.812 C35.851,94.374 36.000,103.812 36.000,103.812 C36.000,103.812 50.328,92.817 60.000,71.812 C74.179,41.019 62.866,22.612 59.000,9.812 C57.662,5.384 56.822,-2.574 66.000,0.812 C75.352,4.263 100.076,21.570 113.000,39.812 C131.445,65.847 138.000,90.812 138.000,90.812 C138.000,90.812 143.906,83.482 146.000,75.812 C148.365,67.151 148.400,58.573 155.999,67.813 C163.226,76.600 173.959,93.113 180.000,108.812 C190.969,137.321 187.899,164.809 187.899,164.809 Z"
+                          id="path-1" class="cls-3" fill-rule="evenodd" />
+                        <path
+                          d="M94.000,254.812 C58.101,254.812 29.000,225.711 29.000,189.812 C29.000,168.151 37.729,155.000 55.896,137.166 C67.528,125.747 78.415,111.722 83.042,102.172 C83.953,100.292 86.026,90.495 94.019,101.966 C98.212,107.982 104.785,118.681 109.000,127.812 C116.266,143.555 118.000,158.812 118.000,158.812 C118.000,158.812 125.121,154.616 130.000,143.812 C131.573,140.330 134.753,127.148 143.643,140.328 C150.166,150.000 159.127,167.390 159.000,189.812 C159.000,225.711 129.898,254.812 94.000,254.812 Z"
+                          id="path-2" class="cls-4" fill-rule="evenodd" />
+                        <path
+                          d="M95.000,183.812 C104.250,183.812 104.250,200.941 116.000,223.812 C123.824,239.041 112.121,254.812 95.000,254.812 C77.879,254.812 69.000,240.933 69.000,223.812 C69.000,206.692 85.750,183.812 95.000,183.812 Z"
+                          id="path-3" class="cls-5" fill-rule="evenodd" />
+                      </g>
+                    </svg>
+                    <p class="text-xs text-black">Friday</p>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="p-2 bg-[#ffffff] flex flex-col gap-2 rounded-xl items-center">
+                    <p class="text-xs text-stone-400">Day 7</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32px"
+                      height="32px" viewBox="-33 0 255 255" preserveAspectRatio="xMidYMid">
+                      <defs>
+                        <style>
+                          .cls-3 {
+                            fill: url(#linear-gradient-1);
+                          }
+
+                          .cls-4 {
+                            fill: #fc9502;
+                          }
+
+                          .cls-5 {
+                            fill: #fce202;
+                          }
+                        </style>
+
+                        <linearGradient id="linear-gradient-1" gradientUnits="userSpaceOnUse" x1="94.141" y1="255"
+                          x2="94.141" y2="0.188">
+                          <stop offset="0" stop-color="#ff4c0d" />
+                          <stop offset="1" stop-color="#fc9502" />
+                        </linearGradient>
+                      </defs>
+                      <g id="fire">
+                        <path
+                          d="M187.899,164.809 C185.803,214.868 144.574,254.812 94.000,254.812 C42.085,254.812 -0.000,211.312 -0.000,160.812 C-0.000,154.062 -0.121,140.572 10.000,117.812 C16.057,104.191 19.856,95.634 22.000,87.812 C23.178,83.513 25.469,76.683 32.000,87.812 C35.851,94.374 36.000,103.812 36.000,103.812 C36.000,103.812 50.328,92.817 60.000,71.812 C74.179,41.019 62.866,22.612 59.000,9.812 C57.662,5.384 56.822,-2.574 66.000,0.812 C75.352,4.263 100.076,21.570 113.000,39.812 C131.445,65.847 138.000,90.812 138.000,90.812 C138.000,90.812 143.906,83.482 146.000,75.812 C148.365,67.151 148.400,58.573 155.999,67.813 C163.226,76.600 173.959,93.113 180.000,108.812 C190.969,137.321 187.899,164.809 187.899,164.809 Z"
+                          id="path-1" class="cls-3" fill-rule="evenodd" />
+                        <path
+                          d="M94.000,254.812 C58.101,254.812 29.000,225.711 29.000,189.812 C29.000,168.151 37.729,155.000 55.896,137.166 C67.528,125.747 78.415,111.722 83.042,102.172 C83.953,100.292 86.026,90.495 94.019,101.966 C98.212,107.982 104.785,118.681 109.000,127.812 C116.266,143.555 118.000,158.812 118.000,158.812 C118.000,158.812 125.121,154.616 130.000,143.812 C131.573,140.330 134.753,127.148 143.643,140.328 C150.166,150.000 159.127,167.390 159.000,189.812 C159.000,225.711 129.898,254.812 94.000,254.812 Z"
+                          id="path-2" class="cls-4" fill-rule="evenodd" />
+                        <path
+                          d="M95.000,183.812 C104.250,183.812 104.250,200.941 116.000,223.812 C123.824,239.041 112.121,254.812 95.000,254.812 C77.879,254.812 69.000,240.933 69.000,223.812 C69.000,206.692 85.750,183.812 95.000,183.812 Z"
+                          id="path-3" class="cls-5" fill-rule="evenodd" />
+                      </g>
+                    </svg>
+                    <p class="text-xs text-black">Saturday</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bento__item-text">
+              <h5 class="text-accent font-semibold">Day Streak</h5>
+              <p class="bento__item-text-description">Track Your Learnin Progress With Day Streak</p>
+            </div>
+          </div>
+        </div>
+        <div class="bento__item bento__item--small">
+          <div class="flex flex-col justify-between">
+            <div class="p-4">
+              <div class="bg-[#ffffff] rounded-xl flex flex-col p-4 gap-2">
+                <p class="text-left text-black font-semibold">Monthly Challenge Rank</p>
+                <div class="flex flex-col">
+                  <div class="flex flex-col py-2 border-b border-b-stone-200">
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center gap-6">
+                        <img loading="lazy" src="../src/assets/profile.avif" alt="" class="w-10 h-10 mx-auto">
+                        <div class="flex flex-col items-start">
+                          <p class="text-black font-semibold">Edgar Michael</p>
+                          <p class="text-stone-400">201 Days Streak</p>
+                        </div>
+                      </div>
+                      <span class="bg-orange-100 text-accent py-2 px-4 rounded-full text-xs font-semibold">Rank 1</span>
+                    </div>
+                  </div>
+                  <div class="flex flex-col py-2 border-b border-b-stone-200">
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center gap-6">
+                        <img loading="lazy" src="../src/assets/profile.avif" alt="" class="w-10 h-10 mx-auto">
+                        <div class="flex flex-col items-start">
+                          <p class="text-black font-semibold">Edgar Michael</p>
+                          <p class="text-stone-400">201 Days Streak</p>
+                        </div>
+                      </div>
+                      <span class="bg-orange-100 text-accent py-2 px-4 rounded-full text-xs font-semibold">Rank 1</span>
+                    </div>
+                  </div>
+                  <div class="flex flex-col py-2 border-b border-b-stone-200">
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center gap-6">
+                        <img loading="lazy" src="../src/assets/profile.avif" alt="" class="w-10 h-10 mx-auto">
+                        <div class="flex flex-col items-start">
+                          <p class="text-black font-semibold">Edgar Michael</p>
+                          <p class="text-stone-400">201 Days Streak</p>
+                        </div>
+                      </div>
+                      <span class="bg-orange-100 text-accent py-2 px-4 rounded-full text-xs font-semibold">Rank 1</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bento__item-content">
+              <div class="bento__item-text">
+                <h5 class="text-accent font-semibold">Rank System</h5>
+                <p class="bento__item-text-description">Motivate Your Learning With Rank System</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bento__item bento__item--small">
+          <div class="flex flex-col justify-between">
+            <div class="p-4">
+              <div class="bg-[#ffffff] rounded-xl flex flex-col p-4 gap-2">
+                <p class="text-left text-black font-semibold">Monthly Challenge Rank</p>
+                <div class="flex flex-col">
+                  <div class="flex flex-col py-2 border-b border-b-stone-200">
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center gap-6">
+                        <img loading="lazy" src="../src/assets/profile.avif" alt="" class="w-10 h-10 mx-auto">
+                        <div class="flex flex-col items-start">
+                          <p class="text-black font-semibold">Edgar Michael</p>
+                          <p class="text-stone-400">201 Days Streak</p>
+                        </div>
+                      </div>
+                      <span class="bg-orange-100 text-accent py-2 px-4 rounded-full text-xs font-semibold">Rank 1</span>
+                    </div>
+                  </div>
+                  <div class="flex flex-col py-2 border-b border-b-stone-200">
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center gap-6">
+                        <img loading="lazy" src="../src/assets/profile.avif" alt="" class="w-10 h-10 mx-auto">
+                        <div class="flex flex-col items-start">
+                          <p class="text-black font-semibold">Edgar Michael</p>
+                          <p class="text-stone-400">201 Days Streak</p>
+                        </div>
+                      </div>
+                      <span class="bg-orange-100 text-accent py-2 px-4 rounded-full text-xs font-semibold">Rank 1</span>
+                    </div>
+                  </div>
+                  <div class="flex flex-col py-2 border-b border-b-stone-200">
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center gap-6">
+                        <img loading="lazy" src="../src/assets/profile.avif" alt="" class="w-10 h-10 mx-auto">
+                        <div class="flex flex-col items-start">
+                          <p class="text-black font-semibold">Edgar Michael</p>
+                          <p class="text-stone-400">201 Days Streak</p>
+                        </div>
+                      </div>
+                      <span class="bg-orange-100 text-accent py-2 px-4 rounded-full text-xs font-semibold">Rank 1</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bento__item-content">
+              <div class="bento__item-text">
+                <h5 class="text-accent font-semibold">Rank System</h5>
+                <p class="bento__item-text-description">Motivate Your Learning With Rank System</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product cards Serction -->
+  <div class="mx-auto max-w-7xl px-6 py-10 lg:px-8 lg:py-16">
+    <div class="flex flex-col items-center gap-[40px] md:gap-16">
+      <h3 class="text-2xl md:text-4xl text-center px-0 lg:px-60">There is nothing that limit you from wanting to learn
+        whatever you
+        want
+      </h3>
+      <div class="grid grid-cols-12 md:grid-cols-3 gap-x-8 gap-y-10">
+        <div class="col-span-12 sm:col-span-6 lg:col-span-1 rounded-2xl">
+          <div class="relative">
+            <img loading="lazy" src="../src/assets/card_1.jpg" alt="product" class="rounded-t-2xl w-full" />
+            <p class="absolute top-2 left-2 py-1 px-2 bg-accent text-white rounded-md text-xs">SUMMER EVENTS</p>
+          </div>
+          <div
+            class="p-4 flex flex-col items-start gap-2 border border-t-transparent border-b-stone-200 border-r-stone-200 border-l-stone-200 rounded-b-2xl">
+            <h6 class="font-semibold">
+              Mastering Interaction Design:
+              From Principles to Practice
+            </h6>
+            <p class="w-full line-clamp-2 text-xs">
+              Dive into the core principles of interactions design Lorem ipsum dolor sit amet consectetur adipisicing
+              elit. In exercitationem suscipit doloremque quis, voluptatibus recusandae natus.
+            </p>
+            <p class="flex items-baseline gap-1">
+              <span class="text-xs">By</span>
+              <span class="text-sm font-semibold">Devone Lane</span>
+            </p>
+            <p class="flex items-baseline gap-1">
+              <span class="text-xs text-stone-400">Level:</span>
+              <span class="text-xs text-black font-semibold">Expert</span>
+            </p>
+            <p class="flex items-baseline gap-4">
+              <span class="text-lg font-semibold line-through">$69.00</span>
+              <span class="text-lg font-semibold text-accent">$59.80</span>
+            </p>
+            <div>
+              <button class="py-1 px-2 text-xs border font-semibold">FREE</button>
+              <button class="py-1 px-2 text-xs border font-semibold">EXPERT</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-12 sm:col-span-6 lg:col-span-1 rounded-2xl">
+          <div>
+            <img loading="lazy" src="../src/assets/card_2.jpg" alt="product" class="rounded-t-2xl w-full" />
+          </div>
+          <div
+            class="p-4 flex flex-col items-start gap-2 border border-t-transparent border-b-stone-200 border-r-stone-200 border-l-stone-200 rounded-b-2xl">
+            <h6 class="font-semibold">
+              Mastering Interaction Design:
+              From Principles to Practice
+            </h6>
+            <p class="w-full line-clamp-2 text-xs">
+              Dive into the core principles of interactions design Lorem ipsum dolor sit amet consectetur adipisicing
+              elit. In exercitationem suscipit doloremque quis, voluptatibus recusandae natus.
+            </p>
+            <p class="flex items-baseline gap-1">
+              <span class="text-xs">By</span>
+              <span class="text-sm font-semibold">Devone Lane</span>
+            </p>
+            <p class="flex items-baseline gap-1">
+              <span class="text-xs text-stone-400">Level:</span>
+              <span class="text-xs text-black font-semibold">Expert</span>
+            </p>
+            <p class="flex items-baseline gap-4">
+              <span class="text-lg font-semibold line-through">$69.00</span>
+              <span class="text-lg font-semibold text-accent">$59.80</span>
+            </p>
+            <div>
+              <button class="py-1 px-2 text-xs border font-semibold">FREE</button>
+              <button class="py-1 px-2 text-xs border font-semibold">EXPERT</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-12 sm:col-span-6 lg:col-span-1 rounded-2xl">
+          <div>
+            <img loading="lazy" src="../src/assets/card_4.jpg" alt="product" class="rounded-t-2xl w-full" />
+          </div>
+          <div
+            class="p-4 flex flex-col items-start gap-2 border border-t-transparent border-b-stone-200 border-r-stone-200 border-l-stone-200 rounded-b-2xl">
+            <h6 class="font-semibold">
+              Mastering Interaction Design:
+              From Principles to Practice
+            </h6>
+            <p class="w-full line-clamp-2 text-xs">
+              Dive into the core principles of interactions design Lorem ipsum dolor sit amet consectetur adipisicing
+              elit. In exercitationem suscipit doloremque quis, voluptatibus recusandae natus.
+            </p>
+            <p class="flex items-baseline gap-1">
+              <span class="text-xs">By</span>
+              <span class="text-sm font-semibold">Devone Lane</span>
+            </p>
+            <p class="flex items-baseline gap-1">
+              <span class="text-xs text-stone-400">Level:</span>
+              <span class="text-xs text-black font-semibold">Expert</span>
+            </p>
+            <p class="flex items-baseline gap-4">
+              <span class="text-lg font-semibold line-through">$69.00</span>
+              <span class="text-lg font-semibold text-accent">$59.80</span>
+            </p>
+            <div>
+              <button class="py-1 px-2 text-xs border font-semibold">FREE</button>
+              <button class="py-1 px-2 text-xs border font-semibold">EXPERT</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-12 sm:col-span-6 lg:col-span-1 rounded-2xl">
+          <div class="relative">
+            <img loading="lazy" src="../src/assets/card_5.jpg" alt="product" class="rounded-t-2xl w-full" />
+            <p class="absolute top-2 left-2 py-1 px-2 bg-accent text-white rounded-md text-xs">SUMMER EVENTS</p>
+          </div>
+          <div
+            class="p-4 flex flex-col items-start gap-2 border border-t-transparent border-b-stone-200 border-r-stone-200 border-l-stone-200 rounded-b-2xl">
+            <h6 class="font-semibold">
+              Mastering Interaction Design:
+              From Principles to Practice
+            </h6>
+            <p class="w-full line-clamp-2 text-xs">
+              Dive into the core principles of interactions design Lorem ipsum dolor sit amet consectetur adipisicing
+              elit. In exercitationem suscipit doloremque quis, voluptatibus recusandae natus.
+            </p>
+            <p class="flex items-baseline gap-1">
+              <span class="text-xs">By</span>
+              <span class="text-sm font-semibold">Devone Lane</span>
+            </p>
+            <p class="flex items-baseline gap-1">
+              <span class="text-xs text-stone-400">Level:</span>
+              <span class="text-xs text-black font-semibold">Expert</span>
+            </p>
+            <p class="flex items-baseline gap-4">
+              <span class="text-lg font-semibold line-through">$69.00</span>
+              <span class="text-lg font-semibold text-accent">$59.80</span>
+            </p>
+            <div>
+              <button class="py-1 px-2 text-xs border font-semibold">FREE</button>
+              <button class="py-1 px-2 text-xs border font-semibold">EXPERT</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-12 sm:col-span-6 lg:col-span-1 rounded-2xl">
+          <div>
+            <img loading="lazy" src="../src/assets/card_6.jpg" alt="product" class="rounded-t-2xl w-full" />
+          </div>
+          <div
+            class="p-4 flex flex-col items-start gap-2 border border-t-transparent border-b-stone-200 border-r-stone-200 border-l-stone-200 rounded-b-2xl">
+            <h6 class="font-semibold">
+              Mastering Interaction Design:
+              From Principles to Practice
+            </h6>
+            <p class="w-full line-clamp-2 text-xs">
+              Dive into the core principles of interactions design Lorem ipsum dolor sit amet consectetur adipisicing
+              elit. In exercitationem suscipit doloremque quis, voluptatibus recusandae natus.
+            </p>
+            <p class="flex items-baseline gap-1">
+              <span class="text-xs">By</span>
+              <span class="text-sm font-semibold">Devone Lane</span>
+            </p>
+            <p class="flex items-baseline gap-1">
+              <span class="text-xs text-stone-400">Level:</span>
+              <span class="text-xs text-black font-semibold">Expert</span>
+            </p>
+            <p class="flex items-baseline gap-4">
+              <span class="text-lg font-semibold line-through">$69.00</span>
+              <span class="text-lg font-semibold text-accent">$59.80</span>
+            </p>
+            <div>
+              <button class="py-1 px-2 text-xs border font-semibold">FREE</button>
+              <button class="py-1 px-2 text-xs border font-semibold">EXPERT</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-12 sm:col-span-6 lg:col-span-1 rounded-2xl">
+          <div class="relative">
+            <img loading="lazy" src="../src/assets/card_7.avif" alt="product" class="rounded-t-2xl w-full" />
+            <p class="absolute top-2 left-2 py-1 px-2 bg-accent text-white rounded-md text-xs">SUMMER EVENTS</p>
+          </div>
+          <div
+            class="p-4 flex flex-col items-start gap-2 border border-t-transparent border-b-stone-200 border-r-stone-200 border-l-stone-200 rounded-b-2xl">
+            <h6 class="font-semibold">
+              Mastering Interaction Design:
+              From Principles to Practice
+            </h6>
+            <p class="w-full line-clamp-2 text-xs">
+              Dive into the core principles of interactions design Lorem ipsum dolor sit amet consectetur adipisicing
+              elit. In exercitationem suscipit doloremque quis, voluptatibus recusandae natus.
+            </p>
+            <p class="flex items-baseline gap-1">
+              <span class="text-xs">By</span>
+              <span class="text-sm font-semibold">Devone Lane</span>
+            </p>
+            <p class="flex items-baseline gap-1">
+              <span class="text-xs text-stone-400">Level:</span>
+              <span class="text-xs text-black font-semibold">Expert</span>
+            </p>
+            <p class="flex items-baseline gap-4">
+              <span class="text-lg font-semibold line-through">$69.00</span>
+              <span class="text-lg font-semibold text-accent">$59.80</span>
+            </p>
+            <div>
+              <button class="py-1 px-2 text-xs border font-semibold">FREE</button>
+              <button class="py-1 px-2 text-xs border font-semibold">EXPERT</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="py-2 px-4 rounded-full bg-black text-white hover:bg-accent">Explore Course</button>
+    </div>
+  </div>
+
+  <!-- Faq Section -->
+  <div class="bg-black h-full md:h-[500px]">
+    <div class="rounded-b-3xl bg-[#ffffff] h-full">
+      <div class="mx-auto max-w-7xl px-6 py-10 lg:px-8 lg:py-16" x-data="faqHanlder()">
+        <div class="grid grid-cols-12 gap-x-0 md:gap-x-12">
+          <div class="col-span-12 md:col-span-6 flex flex-col gap-4">
+            <div class="flex flex-col gap-12">
+              <div class="flex flex-col items-start gap-4">
+                <div class="py-2 px-4 rounded-full border border-accent font-semibold text-accent">FaQ</div>
+                <h2 class="text-2xl md:text-5xl">Questions and Answers About Academy and Bootcamp</h2>
+              </div>
+              <div class="flex items-center gap-6">
+                <a href="#" class="block w-[32%] hover:text-accent">
+                  Have A More Questions?
+                </a>
+                <button class="py-1 px-4 rounded-full bg-black hover:bg-accent text-white ">LET ME KNOW!</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-span-12 md:col-span-6 flex flex-col gap-4">
+            <dl>
+              <template x-for="(faq, index) in faqs" :key="index">
+                <div class="pt-6">
+                  <dt class="text-lg">
+                    <button type="button" class="flex w-full items-start justify-between text-left text-gray-400"
+                      @click="toggle(index)" :aria-controls="'faq-' + index" :aria-expanded="isOpen(index)">
+                      <span class="font-medium text-gray-900" x-text="faq.question"></span>
+                      <span class="ml-6 flex h-7 items-center">
+                        <svg class="h-6 w-6 transform transition-transform duration-300"
+                          :class="isOpen(index) ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                          stroke="currentColor" aria-hidden="true">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </span>
+                    </button>
+                  </dt>
+                  <dd x-ref="faq" x-bind:style="isOpen(index) ? `max-height: ${$refs.faq.scrollHeight}px` : ''"
+                    class="mt-2 pr-12 overflow-hidden transition-all ease-in-out duration-300 max-h-0"
+                    :class="isOpen(index) ? 'max-h-96' : ''" :id="'faq-' + index">
+                    <p x-text="faq.answer"></p>
+                  </dd>
+                </div>
+              </template>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Footer Nav -->
+  <footer class="bg-black" aria-labelledby="footer-heading">
+    <h2 id="footer-heading" class="sr-only">Footer</h2>
+    <div class="mx-auto max-w-7xl px-6 lg:px-60">
+      <div class="flex flex-col justify-between">
+        <div class="flex flex-col items-center gap-8 py-8 lg:py-16 lg:pb-16">
+          <div class="flex items-center justify-center gap-2">
+            <img loading="lazy" class="h-8 w-auto"
+              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
+            <span class="text-white text-2xl"></span>
+          </div>
+          <h2 class="text-white text-5xl md:text-6xl text-center">Join Waiting List</h2>
+          <p class="text-xs text-slate-300 text-center">
+            Joint Thousands Of Learners WorldWide And Gain New Skills In Business,
+            Technology, Arts And More, Whether You're Looking To Advance Your Career Or Explore New Hobbies, Has
+            The
+            Perfect Course For You. Enroll Today And Start Your Jounrney Towards Mastery
+          </p>
+          <div>
+            <button
+              class="border border-white hover:border-accent text-white hover:text-accent px-5 py-2 rounded-full">JOIN
+              WAIT
+              LIST</button>
+            <button
+              class="border bg-white text-black hover:bg-accent hover:border-accent hover:text-white px-5 py-2 rounded-full">JOIN
+              WAIT
+              LIST</button>
+          </div>
+        </div>
+        <div class="flex flex-col md:flex-row items-center gap-8 justify-between text-white text-sm pt-4 pb-2">
+          <a href="#" class="hover:text-accent">Support</a>
+          <nav class="grid grid-cols-2 gap-4 md:flex md:flex-row md:gap-6">
+            <button class="hover:text-accent">Home</button>
+            <button class="hover:text-accent">Academy</button>
+            <button class="hover:text-accent">Sounds</button>
+            <button class="hover:text-accent">Artist</button>
+            <button class="hover:text-accent">Limited Edition</button>
+            <button class="hover:text-accent">Template</button>
+          </nav>
+          <p>2045 LTD</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Alpine JS -->
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <script>
+    function navigation() {
+      return {
+        mobileMenuOpen: false,
+        companyMenuOpen: false,
+        mobileCompanyMenuOpen: false,
+        toggleMobileMenu() {
+          this.mobileMenuOpen = !this.mobileMenuOpen;
+        },
+        closeMobileMenu() {
+          this.mobileMenuOpen = false;
+        },
+        toggleCompanyMenu() {
+          this.companyMenuOpen = !this.companyMenuOpen;
+        },
+        toggleMobileCompanyMenu() {
+          this.mobileCompanyMenuOpen = !this.mobileCompanyMenuOpen;
+        },
+      };
+    }
+  </script>
+
+  <!-- Faqs -->
+  <script>
+    const faqs = [
+      {
+        question: "How can I create an account for my child?",
+        answer: "To create an account, click on the 'Sign Up' button on our homepage. Fill in your child's details, choose a username and password, and verify your email address. Once done, your child can start learning right away!"
+      },
+      {
+        question: "What age group is your platform suitable for?",
+        answer: "Our platform is designed for children aged 5-12. We offer a variety of courses and activities tailored to different age groups within this range."
+      },
+      {
+        question: "How much does a subscription cost?",
+        answer: "We offer various subscription plans starting from $9.99 per month. You can also opt for our annual plan which offers better value. Check our pricing page for current offers and discounts."
+      },
+      {
+        question: "Can multiple children use the same account?",
+        answer: "Yes! Our family plan allows up to 4 children to use the platform under one subscription. Each child gets their own personalized learning experience."
+      },
+      {
+        question: "Is there a free trial available?",
+        answer: "Absolutely! We offer a 7-day free trial for all new users. This gives you full access to our platform so you can see if it's the right fit for your child before committing to a subscription."
+      }
+    ];
+
+    function faqHanlder() {
+      return {
+        activeIndex: null,
+        toggle(index) {
+          this.activeIndex = this.activeIndex === index ? null : index;
+        },
+        isOpen(index) {
+          return this.activeIndex === index;
+        }
+      }
+    }
+  </script>
+
+  <!-- Swiper -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script>
+    const swiper = new Swiper('.swiper', {
+      loop: true,
+      speed: 5000,
+      autoplay: {
+        delay: 0,
+        disableOnInteraction: false
+      },
+      freeMode: true, // Allows continuous scrolling without snapping
+      freeModeMomentum: false,
+      breakpoints: {
+        640: {
+          slidesPerView: 1,
+          slidesPerGroup: 1,
+          spaceBetween: 30,
+        },
+        768: {
+          slidesPerView: 3,
+          slidesPerGroup: 1,
+          spaceBetween: 30,
+        },
+        1024: {
+          slidesPerView: 4,
+          slidesPerGroup: 2,
+          spaceBetween: 20,
+        },
+      },
+    });
+    const bentoSwiper = new Swiper('.bento__swiper', {
+      loop: true,
+      slidesPerView: 1.5,
+      spaceBetween: 20,
+      breakpoints: {
+        320: {
+          slidesPerView: 1,
+          spaceBetween: 20
+        },
+        // when window width is >= 480px
+        480: {
+          slidesPerView: 1,
+          spaceBetween: 30
+        },
+        // when window width is >= 640px
+        640: {
+          slidesPerView: 1.5,
+          spaceBetween: 40
+        },
+        768: {
+          slidesPerView: 1.5,
+          spaceBetween: 10,
+        },
+        1024: {
+          slidesPerView: 1.5,
+          spaceBetween: 10,
+        },
+      },
+    });
+    const catSwiper = new Swiper('.cat__swiper', {
+      loop: true,
+      centeredSlides: true,
+      slidesPerView: 4.1,
+      spaceBetween: 10,
+    });
+  </script>
+
+  <!-- Circle -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      let progressValue = 54; // The progress value you want to display
+      let progressCircle = document.querySelector(".progress-circle .progress");
+      let progressNumber = document.querySelector(".progress-circle .progress-number");
+
+      // Calculate the offset based on the progress value
+      let offset = 283 - (283 * progressValue) / 100;
+
+      // Update the circle and number
+      progressCircle.style.strokeDashoffset = offset;
+      progressNumber.textContent = progressValue;
+    });
+  </script>
+</body>
+
+</html>
